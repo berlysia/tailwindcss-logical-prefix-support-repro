@@ -35,11 +35,11 @@ Both issues are **v4-specific** and do not occur in v3.
 }
 ```
 
-### Issue 2: Class Generation Failure with Prefixed Generic Spacing Tokens
+### Issue 2: Class Generation Failure with Prefixed Base Spacing Tokens
 
-**Environment**: Tailwind CSS v4 with prefix + generic spacing configuration
+**Environment**: Tailwind CSS v4 with prefix + base spacing configuration
 
-**Problem**: `tailwindcss-logical` classes (`mis-*`, `mie-*`, `pie-*`, `pis-*`) are not generated when using prefixes with generic spacing tokens, while Tailwind's built-in logical classes (`ms-*`, `me-*`) are generated correctly.
+**Problem**: `tailwindcss-logical` classes (`mis-*`, `mie-*`, `pie-*`, `pis-*`) are not generated when using prefixes with base spacing tokens, while Tailwind's built-in logical classes (`ms-*`, `me-*`) are generated correctly.
 
 **Configuration that fails to generate logical classes**:
 
@@ -47,7 +47,7 @@ Both issues are **v4-specific** and do not occur in v3.
 @import "tailwindcss/utilities.css" prefix(tw);
 @plugin "tailwindcss-logical";
 @theme {
-  --spacing: 1px; /* Generic token with prefix */
+  --spacing: 1px; /* Base token with prefix */
 }
 @source inline("tw:{mis,mie,pie,pis}-{4,6}"); /* ❌ Not generated */
 ```
@@ -58,7 +58,7 @@ Both issues are **v4-specific** and do not occur in v3.
 
 ```css
 @theme {
-  --spacing-4: 1rem; /* Individual tokens */
+  --spacing-4: 1rem; /* Specific tokens */
   --spacing-6: 1.5rem;
 }
 ```
@@ -95,9 +95,9 @@ Both versions include systematic test cases:
 | Configuration       | Prefix | Spacing Type      | v3 Status | v4 Status                   |
 | ------------------- | ------ | ----------------- | --------- | --------------------------- |
 | `default`           | None   | Default tokens    | ✅ Works  | ✅ Works                    |
-| `base-multiple`     | None   | Individual tokens | ✅ Works  | ✅ Works                    |
-| `prefixed-single`   | `tw:`  | Generic token     | ✅ Works  | ❌ Classes not generated    |
-| `prefixed-multiple` | `tw:`  | Individual tokens | ✅ Works  | ❌ CSS var reference errors |
+| `base-multiple`     | None   | Specific tokens   | ✅ Works  | ✅ Works                    |
+| `prefixed-single`   | `tw:`  | Base token        | ✅ Works  | ❌ Classes not generated    |
+| `prefixed-multiple` | `tw:`  | Specific tokens   | ✅ Works  | ❌ CSS var reference errors |
 
 ## Root Cause Analysis
 
@@ -118,14 +118,14 @@ The issues stem from `tailwindcss-logical` plugin's incompatibility with Tailwin
 ### 3. **Spacing Token Structure with Prefixes**
 
 - **v3**: Flexible spacing configuration support, works with any spacing setup
-- **v4**: Plugin requires individual spacing tokens when prefixes are used
-- **Plugin issue**: Cannot generate classes with prefix + generic spacing combination
+- **v4**: Plugin requires specific spacing tokens when prefixes are used
+- **Plugin issue**: Cannot generate classes with prefix + base spacing combination
 
 ## Impact
 
 - **Breaking change** for users migrating from v3 to v4 with prefixes
-- **Complete loss of functionality** when using prefixes with generic spacing tokens (classes not generated)
-- **CSS runtime errors** when using prefixes with individual spacing tokens (incorrect variable references)
+- **Complete loss of functionality** when using prefixes with base spacing tokens (classes not generated)
+- **CSS runtime errors** when using prefixes with specific spacing tokens (incorrect variable references)
 - **Inconsistent behavior** between Tailwind's built-in logical classes (`ms-*`, `me-*`) and plugin-provided classes (`mis-*`, `mie-*`, `pie-*`, `pis-*`)
 
 ## Environment
