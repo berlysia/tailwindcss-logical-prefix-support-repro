@@ -1,0 +1,22 @@
+{
+	"name": "v4",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"build:base-single": "tailwindcss -i ./src/base-single.css -o ./dist/base-single.css",
+		"build:base-multiple": "tailwindcss -i ./src/base-multiple.css -o ./dist/base-multiple.css",
+		"build:base-both": "tailwindcss -i ./src/base-both.css -o ./dist/base-both.css",
+		"build:prefixed-both": "tailwindcss -i ./src/prefixed-both.css -o ./dist/prefixed-both.css",
+		"build:prefixed-single": "tailwindcss -i ./src/prefixed-single.css -o ./dist/prefixed-single.css",
+		"build:prefixed-multiple": "tailwindcss -i ./src/prefixed-multiple.css -o ./dist/prefixed-multiple.css",
+		"build": "pnpm run '/^build:.*/'"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"description": "",
+	"dependencies": {
+		"@tailwindcss/cli": "4.1.10",
+		"tailwindcss-logical": "4.0.0"
+	}
+}

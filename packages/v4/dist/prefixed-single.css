@@ -1,0 +1,83 @@
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, utilities;
+@layer theme {
+  :root, :host {
+    --tw-color-green-100: oklch(96.2% 0.044 156.743);
+    --tw-color-blue-100: oklch(93.2% 0.032 255.585);
+    --tw-spacing: 1px;
+    --tw-text-2xl: 1.5rem;
+    --tw-text-2xl--line-height: calc(2 / 1.5);
+    --tw-font-weight-bold: 700;
+  }
+}
+@layer utilities {
+  .tw\:m-4 {
+    margin: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:m-6 {
+    margin: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:ms-4 {
+    margin-inline-start: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:ms-6 {
+    margin-inline-start: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:me-4 {
+    margin-inline-end: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:me-6 {
+    margin-inline-end: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:mb-4 {
+    margin-bottom: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--tw-spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--tw-spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .tw\:rounded {
+    border-radius: 0.25rem;
+  }
+  .tw\:bg-blue-100 {
+    background-color: var(--tw-color-blue-100);
+  }
+  .tw\:bg-green-100 {
+    background-color: var(--tw-color-green-100);
+  }
+  .tw\:p-4 {
+    padding: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:p-6 {
+    padding: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:text-2xl {
+    font-size: var(--tw-text-2xl);
+    line-height: var(--tw-leading, var(--tw-text-2xl--line-height));
+  }
+  .tw\:font-bold {
+    --tw-font-weight: var(--tw-font-weight-bold);
+    font-weight: var(--tw-font-weight-bold);
+  }
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-space-y-reverse: 0;
+      --tw-font-weight: initial;
+    }
+  }
+}

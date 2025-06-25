@@ -1,0 +1,10 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
+@plugin "tailwindcss-logical";
+
+@theme {
+  --spacing: 1px;
+}
+
+@source inline("tw:{p,m}-{4,6} tw:{mis,mie,pie,pis,ms,me}-{4,6} tw:bg-{blue,green}-100 tw:text-2xl tw:font-bold tw:mb-4 tw:space-y-4 tw:rounded");
