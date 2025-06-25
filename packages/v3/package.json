@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"build:default": "tailwindcss -c ./tailwind-default.config.js -i ./src/styles.css -o ./dist/default.css",
 		"build:base-multiple": "tailwindcss -c ./tailwind-base-multiple.config.js -i ./src/styles.css -o ./dist/base-multiple.css",
 		"build:prefixed-multiple": "tailwindcss -c ./tailwind-prefixed-multiple.config.js -i ./src/styles.css -o ./dist/prefixed-multiple.css",
 		"build": "pnpm run '/^build:.*/'"

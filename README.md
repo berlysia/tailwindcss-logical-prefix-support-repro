@@ -15,7 +15,7 @@ Both issues are **v4-specific** and do not occur in v3.
 
 ### Issue 1: CSS Variable Reference Errors in Prefixed Configurations
 
-**Environment**: Tailwind CSS v4 with `prefix: 'tw:'`
+**Environment**: Tailwind CSS v4 with `prefix: 'tw'`
 
 **Problem**: Logical property classes reference unprefixed CSS variables instead of properly prefixed ones.
 
@@ -35,24 +35,29 @@ Both issues are **v4-specific** and do not occur in v3.
 }
 ```
 
-### Issue 2: Incomplete Class Generation with Generic Spacing Tokens
+### Issue 2: Class Generation Failure with Prefixed Generic Spacing Tokens
 
-**Environment**: Tailwind CSS v4 with generic spacing configuration
+**Environment**: Tailwind CSS v4 with prefix + generic spacing configuration
 
-**Problem**: Logical property classes are not generated when using generic spacing tokens.
+**Problem**: `tailwindcss-logical` classes (`mis-*`, `mie-*`, `pie-*`, `pis-*`) are not generated when using prefixes with generic spacing tokens, while Tailwind's built-in logical classes (`ms-*`, `me-*`) are generated correctly.
 
-**Configuration that fails**:
+**Configuration that fails to generate logical classes**:
 
 ```css
-@config {
-  --spacing: 1px; /* Generic token */
+@import "tailwindcss/utilities.css" prefix(tw);
+@plugin "tailwindcss-logical";
+@theme {
+  --spacing: 1px; /* Generic token with prefix */
 }
+@source inline("tw:{mis,mie,pie,pis}-{4,6}"); /* ❌ Not generated */
 ```
+
+**Result**: Only `tw:ms-*`, `tw:me-*` generated, no `tw:mis-*`, `tw:mie-*`, `tw:pie-*`, `tw:pis-*`
 
 **Configuration that works**:
 
 ```css
-@config {
+@theme {
   --spacing-4: 1rem; /* Individual tokens */
   --spacing-6: 1.5rem;
 }
@@ -87,12 +92,12 @@ Both issues are **v4-specific** and do not occur in v3.
 
 Both versions include systematic test cases:
 
-| Configuration       | Prefix | Spacing Type      | v3 Status | v4 Status         |
-| ------------------- | ------ | ----------------- | --------- | ----------------- |
-| `base-multiple`     | None   | Individual tokens | ✅ Works  | ✅ Works          |
-| `prefixed-multiple` | `tw-`  | Individual tokens | ✅ Works  | ❌ CSS var errors |
-
-_Note: Single/generic spacing token tests removed as they don't generate logical classes in either version._
+| Configuration       | Prefix | Spacing Type      | v3 Status | v4 Status                   |
+| ------------------- | ------ | ----------------- | --------- | --------------------------- |
+| `default`           | None   | Default tokens    | ✅ Works  | ✅ Works                    |
+| `base-multiple`     | None   | Individual tokens | ✅ Works  | ✅ Works                    |
+| `prefixed-single`   | `tw:`  | Generic token     | ✅ Works  | ❌ Classes not generated    |
+| `prefixed-multiple` | `tw:`  | Individual tokens | ✅ Works  | ❌ CSS var reference errors |
 
 ## Root Cause Analysis
 
@@ -110,17 +115,18 @@ The issues stem from `tailwindcss-logical` plugin's incompatibility with Tailwin
 - **v4**: Prefixes applied to CSS variables (`--tw-spacing-4`)
 - **Plugin issue**: Doesn't adapt variable references to prefixed versions
 
-### 3. **Spacing Token Structure**
+### 3. **Spacing Token Structure with Prefixes**
 
-- **v3**: Flexible spacing configuration support
-- **v4**: Requires specific token naming patterns
-- **Plugin issue**: Only works with individual tokens, not generic ones
+- **v3**: Flexible spacing configuration support, works with any spacing setup
+- **v4**: Plugin requires individual spacing tokens when prefixes are used
+- **Plugin issue**: Cannot generate classes with prefix + generic spacing combination
 
 ## Impact
 
 - **Breaking change** for users migrating from v3 to v4 with prefixes
-- **Reduced functionality** with generic spacing configurations
-- **CSS runtime errors** due to undefined variable references
+- **Complete loss of functionality** when using prefixes with generic spacing tokens (classes not generated)
+- **CSS runtime errors** when using prefixes with individual spacing tokens (incorrect variable references)
+- **Inconsistent behavior** between Tailwind's built-in logical classes (`ms-*`, `me-*`) and plugin-provided classes (`mis-*`, `mie-*`, `pie-*`, `pis-*`)
 
 ## Environment
 

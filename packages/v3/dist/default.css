@@ -1,0 +1,96 @@
+.m-4 {
+  margin: 1rem
+}
+
+.m-6 {
+  margin: 1.5rem
+}
+
+.mb-4 {
+  margin-bottom: 1rem
+}
+
+.me-4 {
+  margin-inline-end: 1rem
+}
+
+.me-6 {
+  margin-inline-end: 1.5rem
+}
+
+.ms-4 {
+  margin-inline-start: 1rem
+}
+
+.ms-6 {
+  margin-inline-start: 1.5rem
+}
+
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+}
+
+.rounded {
+  border-radius: 0.25rem
+}
+
+.bg-blue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
+}
+
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1))
+}
+
+.p-4 {
+  padding: 1rem
+}
+
+.p-6 {
+  padding: 1.5rem
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.font-bold {
+  font-weight: 700
+}
+
+.mie-4 {
+  margin-inline-end: 1rem
+}
+
+.mie-6 {
+  margin-inline-end: 1.5rem
+}
+
+.mis-4 {
+  margin-inline-start: 1rem
+}
+
+.mis-6 {
+  margin-inline-start: 1.5rem
+}
+
+.pie-4 {
+  padding-inline-end: 1rem
+}
+
+.pie-6 {
+  padding-inline-end: 1.5rem
+}
+
+.pis-4 {
+  padding-inline-start: 1rem
+}
+
+.pis-6 {
+  padding-inline-start: 1.5rem
+}

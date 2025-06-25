@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"build:default": "tailwindcss -i ./src/default.css -o ./dist/default.css",
 		"build:base-single": "tailwindcss -i ./src/base-single.css -o ./dist/base-single.css",
 		"build:base-multiple": "tailwindcss -i ./src/base-multiple.css -o ./dist/base-multiple.css",
 		"build:base-both": "tailwindcss -i ./src/base-both.css -o ./dist/base-both.css",
